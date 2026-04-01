@@ -25,8 +25,20 @@ class CreateSubscriptionServiceTest {
 
     @Test
     void shouldCreateSubscriptionWithBasicMonthlyPlanAndActiveStatus() {
-        CreateSubscriptionService service = new CreateSubscriptionService();
         UUID customerId = UUID.randomUUID();
+        User user = User.builder()
+                .id(customerId)
+                .name("John")
+                .lastname("Snow")
+                .email("john.snow@email.com")
+                .password("123456")
+                .role(Role.USER)
+                .build();
+
+        JpaUserRepository userRepository = mock(JpaUserRepository.class);
+        when(userRepository.findById(customerId)).thenReturn(Optional.of(user));
+
+        CreateSubscriptionService service = new CreateSubscriptionService(userRepository);
 
         Subscription subscription = service.create(customerId, PlanType.BASIC, BillingCycle.MONTHLY);
 
@@ -35,5 +47,7 @@ class CreateSubscriptionServiceTest {
         assertEquals(PlanType.BASIC, subscription.getPlanType());
         assertEquals(BillingCycle.MONTHLY, subscription.getBillingCycle());
         assertEquals(new BigDecimal("29.90"), subscription.getAmount());
+
+        verify(userRepository).findById(customerId);
     }
 }
