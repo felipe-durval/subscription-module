@@ -29,6 +29,7 @@ class CreateSubscriptionServiceTest {
 
         Subscription subscription = service.create(UUID.randomUUID(), PlanType.BASIC, BillingCycle.MONTHLY);
 
+        assertEquals(customerId, subscription.getCustomerId());
         assertEquals(SubscriptionStatus.ACTIVE, subscription.getStatus());
         assertEquals(PlanType.BASIC, subscription.getPlanType());
         assertEquals(BillingCycle.MONTHLY, subscription.getBillingCycle());
