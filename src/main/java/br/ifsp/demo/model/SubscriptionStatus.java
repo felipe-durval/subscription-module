@@ -1,4 +1,7 @@
 package br.ifsp.demo.model;
 
-public class SubscriptionStatus {
+public enum SubscriptionStatus {
+    ACTIVE,
+    CANCELLED,
+    SUSPENDED
 }
