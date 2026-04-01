@@ -1,4 +1,4 @@
 package br.ifsp.demo.model;
 
-public class Money {
+public final class Money {
 }

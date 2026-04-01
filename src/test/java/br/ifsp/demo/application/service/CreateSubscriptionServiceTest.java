@@ -32,5 +32,6 @@ class CreateSubscriptionServiceTest {
         assertEquals(SubscriptionStatus.ACTIVE, subscription.getStatus());
         assertEquals(PlanType.BASIC, subscription.getPlanType());
         assertEquals(BillingCycle.MONTHLY, subscription.getBillingCycle());
+        assertEquals(new BigDecimal("29.90"), subscription.getAmount());
     }
 }
