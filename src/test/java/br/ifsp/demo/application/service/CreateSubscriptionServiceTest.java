@@ -26,8 +26,9 @@ class CreateSubscriptionServiceTest {
     @Test
     void shouldCreateSubscriptionWithBasicMonthlyPlanAndActiveStatus() {
         CreateSubscriptionService service = new CreateSubscriptionService();
+        UUID customerId = UUID.randomUUID();
 
-        Subscription subscription = service.create(UUID.randomUUID(), PlanType.BASIC, BillingCycle.MONTHLY);
+        Subscription subscription = service.create(customerId, PlanType.BASIC, BillingCycle.MONTHLY);
 
         assertEquals(customerId, subscription.getCustomerId());
         assertEquals(SubscriptionStatus.ACTIVE, subscription.getStatus());
